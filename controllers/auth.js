@@ -32,14 +32,18 @@ exports.registration = async (req, res) => {
 
 //login user locally
 exports.login = async (req, res) => {
-  const { matric, password } = req.body;
+  const { matric, firstname, lastname } = req.body;
   try {
     let user = await User.findOne({ matric });
-    if (password !== user.password) {
+    if (firstname !== user.firstname || lastname  !== user.lastname) {
       return res.json({ msg: "passowrd does not match" });
     }
     if (!user) {
       return res.status(400).json("user not found");
+    }
+
+    if(user.vote.length > 0){
+      return res.json("Already voted")
     }
     sendTokenResponse(user, 200, res);
   } catch (err) {
@@ -66,14 +70,6 @@ exports.vote = async (req, res) => {
   }
 };
 
-const countVote = async (req, res) => {
-  try {
-    const aspirants = await Aspirants.findByid(req.body.aspirantId);
-    const user = await User.find({ _id: { $in: [aspirants.vote] } });
-  } catch (error) {
-    console.log(error);
-  }
-};
 
 exports.getUsers = async (req, res) => {
   try {

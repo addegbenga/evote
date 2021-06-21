@@ -9,10 +9,8 @@ const aspirantSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
-    firstName: String,
-    lastName: String,
-    position: String,
-    photoUrl: String,
+    name:String,
+    position: String
   },
   {
     timestamps: true,
@@ -21,9 +19,11 @@ const aspirantSchema = new mongoose.Schema(
 
 const userSchema = new mongoose.Schema(
   {
-    name: {
+    firstname: {
       type: String,
-      required: [true, "Please enter your name!"],
+    },
+    lastname: {
+      type: String,
     },
     matric :{
       type:String
@@ -40,10 +40,6 @@ const userSchema = new mongoose.Schema(
         ref: "Aspirant",
       },
     ],
-    password: {
-      type: String,
-      default: passwordGenerator(6, false),
-    },
   },
   {
     timestamps: true,
