@@ -26,5 +26,4 @@ router.get("/getuser", auth, getUser);
 router.get("/aspirants", getAspirants);
 router.post("/bulk", createAllStudent);
 router.post("/updatebulk", updateAllStudent);
-
 module.exports = router;

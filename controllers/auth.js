@@ -36,7 +36,7 @@ exports.login = async (req, res) => {
   try {
     let user = await User.findOne({ matric });
     if (firstname !== user.firstname || lastname  !== user.lastname) {
-      return res.json({ msg: "passowrd does not match" });
+      return res.json({ error: "password incorrect" });
     }
     if (!user) {
       return res.status(400).json("user not found");
@@ -47,7 +47,7 @@ exports.login = async (req, res) => {
     }
     sendTokenResponse(user, 200, res);
   } catch (err) {
-    console.error(err.message);
+    console.error(err.message);+
     res.status(500).send(err + " Server error");
   }
 };

@@ -18,10 +18,10 @@ const aspirantSchema = new mongoose.Schema(
 
 const userSchema = new mongoose.Schema(
   {
-    firstname: {
+    firstName: {
       type: String,
     },
-    lastname: {
+    lastName: {
       type: String,
     },
     matric :{
@@ -29,9 +29,6 @@ const userSchema = new mongoose.Schema(
     },
     department: {
       type: String,
-    },
-    level: {
-      type: Number,
     },
     votes: [
       {
