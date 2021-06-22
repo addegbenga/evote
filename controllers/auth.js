@@ -42,7 +42,7 @@ exports.login = async (req, res) => {
       return res.status(400).json("user not found");
     }
 
-    if(user.vote.length > 0){
+    if(user.votes.length > 0){
       return res.json("Already voted")
     }
     sendTokenResponse(user, 200, res);
@@ -99,6 +99,11 @@ exports.getAspirants = async (req, res) => {
     console.log(error);
   }
 };
+
+
+
+
+
 
 exports.createAllStudent = async (req, res) => {
   try {
