@@ -32,10 +32,10 @@ exports.registration = async (req, res) => {
 
 //login user locally
 exports.login = async (req, res) => {
-  const { matric, firstname, lastname } = req.body;
+  const { matric, firstName, lastName } = req.body;
   try {
     let user = await User.findOne({ matric });
-    if (firstname !== user.firstname || lastname  !== user.lastname) {
+    if (firstName !== user.firstName || lastName  !== user.lastName) {
       return res.json({ error: "password incorrect" });
     }
     if (!user) {
