@@ -33,12 +33,14 @@ exports.registration = async (req, res) => {
 //login user locally
 exports.login = async (req, res) => {
   const { matric, firstName, lastName } = req.body;
+  console.log(req.body)
+
   try {
     let user = await User.findOne({ matric });
     if (firstName !== user.firstName || lastName  !== user.lastName) {
       return res.json({ error: "password incorrect" });
     }
-    if (!user) {
+    if (user) {
       return res.status(400).json("user not found");
     }
 
