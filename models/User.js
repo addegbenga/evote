@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema.Types;
 const jwt = require("jsonwebtoken");
-const passwordGenerator = require("password-generator");
 
 const aspirantSchema = new mongoose.Schema(
   {
