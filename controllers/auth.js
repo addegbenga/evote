@@ -33,24 +33,25 @@ exports.registration = async (req, res) => {
 //login user locally
 exports.login = async (req, res) => {
   const { matric, firstName, lastName } = req.body;
-  console.log(req.body)
+  console.log(req.body);
 
   try {
     let user = await User.findOne({ matric });
-    if (firstName !== user.firstName || lastName  !== user.lastName) {
+    console.log(user);
+    if (firstName !== user.firstName || lastName !== user.lastName) {
       return res.json({ error: "password incorrect" });
     }
     if (user) {
       return res.status(400).json("user not found");
     }
 
-    if(user.votes.length > 0){
-      return res.json("Already voted")
+    if (user.votes.length > 0) {
+      return res.json("Already voted");
     }
     sendTokenResponse(user, 200, res);
   } catch (err) {
-    console.error(err.message);+
-    res.status(500).send(err + " Server error");
+    console.error(err.message);
+    +res.status(500).send(err + " Server error");
   }
 };
 
@@ -71,7 +72,6 @@ exports.vote = async (req, res) => {
     console.log(error);
   }
 };
-
 
 exports.getUsers = async (req, res) => {
   try {
@@ -102,14 +102,12 @@ exports.getAspirants = async (req, res) => {
   }
 };
 
-
-
-
-
-
 exports.createAllStudent = async (req, res) => {
   try {
-    const newUsers = await User.insertMany(req.body);
+    // const newUsers = await User.insertMany(req.body, {
+    //   writeConcern: { w: "majority", wtimeout: 5000 },
+    // });
+    const newUsers = await User.create(req.body);
     return res.json(newUsers);
   } catch (error) {
     console.log(error);
