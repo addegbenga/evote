@@ -41,7 +41,7 @@ exports.login = async (req, res) => {
     if (firstName !== user.firstName || lastName !== user.lastName) {
       return res.json({ error: "password incorrect" });
     }
-    if (user) {
+    if (!user) {
       return res.status(400).json("user not found");
     }
 
