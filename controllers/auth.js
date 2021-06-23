@@ -80,9 +80,7 @@ exports.getUsers = async (req, res) => {
 
 exports.aspirant = async (req, res) => {
   try {
-    const { ...args } = req.body;
-
-    const resp = await Aspirants.create(args);
+    const resp = await Aspirants.create(req.body);
     return res.json(resp);
   } catch (error) {
     console.log(error);
@@ -100,9 +98,6 @@ exports.getAspirants = async (req, res) => {
 
 exports.createAllStudent = async (req, res) => {
   try {
-    // const newUsers = await User.insertMany(req.body, {
-    //   writeConcern: { w: "majority", wtimeout: 5000 },
-    // });
     const newUsers = await User.create(req.body);
     return res.json(newUsers);
   } catch (error) {
