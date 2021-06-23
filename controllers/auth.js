@@ -36,13 +36,13 @@ exports.login = async (req, res) => {
   try {
     let user = await User.findOne({ matric });
     if (!user) {
-      return res.status(400).json("user not found");
+      return res.status(400).json({error:"user not found"});
     }
     if (firstName !== user.firstName || lastName !== user.lastName) {
       return res.json({ error: "password incorrect" });
     }
     if (user.votes.length > 0) {
-      return res.json("Already voted");
+      return res.json({error:"Already voted"});
     }
     sendTokenResponse(user, 200, res);
   } catch (err) {
